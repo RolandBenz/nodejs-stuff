@@ -1,0 +1,21 @@
+New Github repository:
+    1. Go to Github repositories page
+        https://github.com/RolandBenz?tab=repositories
+        1.1 click New
+            - Repository name: nodejs-stuff
+            - Check Add a Readme file
+        1.2 Click Create repository
+    2. Go to new Github repository nodejs-stuff
+        https://github.com/RolandBenz/nodejs-stuff
+        2.1 click Code
+            - copy Https: https://github.com/RolandBenz/nodejs-stuff.git
+    3. Clone new repository nodejs-stuff
+        1.1 Make folder
+            C:\Users\41792\Documents\5) More-Code\AAA_GitHub-remote
+        1.2 Open terminal and clone repository
+            AAA_GitHub-remote> git clone "https://github.com/RolandBenz/nodejs-stuff.git"
+                Cloning into 'nodejs-stuff'...
+                remote: Enumerating objects: 3, done.
+                remote: Counting objects: 100% (3/3), done.
+                remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+                Receiving objects: 100% (3/3), done.

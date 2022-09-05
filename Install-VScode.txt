@@ -1,0 +1,29 @@
+Installations:
+    1. Install VS Code, the light version of Visual Studio IDE
+        https://code.visualstudio.com/
+        https://code.visualstudio.com/docs/?dv=win
+    2. Install nvm-windows
+        download and install nvm-setup.exe
+            https://github.com/coreybutler/nvm-windows
+            https://github.com/coreybutler/nvm-windows/releases/tag/1.1.9
+            nvm-setup.exe
+        check version
+            > nvm --version
+            Running version 1.1.9.
+    3. Install node and npm
+        Install node and npm latest stable version
+           > nvm install "lts"
+                Downloading node.js version 16.17.0 (64-bit)...
+                Installation complete. If you want to use this version, type
+                nvm use 16.17.0
+           > nvm list
+                 16.17.0
+        Choose version to use with Superuser Terminal
+           > nvm use 16.17.0
+                exit status 1: Zugriff verweigert
+           > nvm use 16.17.0
+            Now using node v16.17.0 (64-bit)
+           > node --version
+                v16.17.0
+           > npm --version
+                8.15.0
