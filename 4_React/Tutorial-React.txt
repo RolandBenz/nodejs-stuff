@@ -1,0 +1,605 @@
+Git commit message
+  Tutorial from: https://code.visualstudio.com/docs/nodejs/reactjs-tutorial and https://github.com/facebook/create-react-app and https://stackoverflow.com/questions/50605219/difference-between-npx-and-npm and https://reactjs.org/tutorial/tutorial.html
+
+With VScode
+    React is a popular JavaScript library developed by Facebook for building user interfaces.
+    The Visual Studio Code editor supports React.js IntelliSense and code navigation out of the box.
+
+Remarks
+  node_modules folder with this framework is over 400 MB!
+
+Tutorials
+    1. A simple React application; App folder: myReactApp
+        Tutorial from: https://code.visualstudio.com/docs/nodejs/reactjs-tutorial
+    2. A React application from Github; App folder: ReactTodoApp
+        Code from: https://github.com/microsoft/vscode-react-sample
+    3. React Tutorial, App folder: myReactTikTakToe
+        Tutorial from: https://reactjs.org/tutorial/tutorial.html
+
+
+1. A simple React application; App folder: 1-Vscode-tutorial
+    - Tutorial from: https://code.visualstudio.com/docs/nodejs/reactjs-tutorial
+    - Code from: https://github.com/facebook/create-react-app
+    - We'll be using the create-react-app generator for this tutorial.
+      To use the generator as well as run the React application server,
+      you'll need Node.js JavaScript runtime and npm (Node.js package manager) installed.
+    1. Create React App
+      https://stackoverflow.com/questions/50605219/difference-between-npx-and-npm
+      Also works according to: https://github.com/facebook/create-react-app
+      - myReactApp> npm init react-app my-react-app
+      - myReactApp> yarn create react-app my-react-app
+      1.1 Vscode-tutorial> npx create-react-app myReactApp
+            Output ERROR
+                Need to install the following packages:
+                  create-react-app@5.0.1
+                Ok to proceed? (y) y
+                    npm WARN deprecated tar@2.2.2: This version of tar is no longer supported, and will not receive security updates. Please upgrade asap.
+                    Cannot create a project named "myReactApp" because of npm naming restrictions:
+                      * name can no longer contain capital letters
+                    Please choose a different project name.
+      1.1 Vscode-tutorial> npx create-react-app my-react-app
+            Output
+                Creating a new React app in C:\Users\41792\Documents\5) More-Code\2_Apps_Nodejs\4_React\1-Vscode-tutorial\my-react-app.
+                Installing packages. This might take a couple of minutes.
+                Installing react, react-dom, and react-scripts with cra-template...
+                added 1391 packages in 3m
+                207 packages are looking for funding
+                  run `npm fund` for details
+                Initialized a git repository.
+                Installing template dependencies using npm...
+                added 55 packages in 11s
+                207 packages are looking for funding
+                  run `npm fund` for details
+                Removing template package using npm...
+                removed 1 package, and audited 1446 packages in 4s
+                207 packages are looking for funding
+                  run `npm fund` for details
+                6 high severity vulnerabilities
+                To address all issues (including breaking changes), run:
+                  npm audit fix --force
+                Run `npm audit` for details.
+                Created git commit.
+                Success! Created my-react-app at C:\Users\41792\Documents\5) More-Code\2_Apps_Nodejs\4_React\1-Vscode-tutorial\my-react-app
+                Inside that directory, you can run several commands:
+                  npm start
+                    Starts the development server.
+                  npm run build
+                    Bundles the app into static files for production.
+                  npm test
+                    Starts the test runner.
+                  npm run eject
+                    Removes this tool and copies build dependencies, configuration files
+                    and scripts into the app directory. If you do this, you can’t go back!
+                We suggest that you begin by typing:
+                  cd my-react-app
+                  npm start
+                Happy hacking!
+    2. Run React App
+      2.1 my-react-app> npm start
+            Output
+                > my-react-app@0.1.0 start
+                > react-scripts start
+                (node:20460) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+                (Use `node --trace-deprecation ...` to show where the warning was created)
+                (node:20460) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+                Starting the development server...
+                Compiled successfully!
+                You can now view my-react-app in the browser.
+                  Local:            http://localhost:3000
+                  On Your Network:  http://172.17.96.1:3000
+                Note that the development build is not optimized.
+                To create a production build, use npm run build.
+                webpack compiled successfully
+    3. Browser opens with URL
+      3.1 http://localhost:3000
+    4. In VScode open Readme.md
+      To read im Markdown Preview press
+      4.1 Ctrl-Shift-V
+    5. Open scr/index.js to see
+        Syntax highlighting
+        bracket matching
+        Intellisense
+        Methods parameter help
+        Linting
+    6. Peek App Definition: In scr/index.js put the cursor over App
+      6.1 Right click and select Peek Definition.
+          A Peek window will open showing the App definition from App.js.
+    7. Let's update the sample application to "Hello World!"
+      7.1 src/index.js
+        7.1.1 Comment out
+            /*
+            import React from 'react';
+            import ReactDOM from 'react-dom/client';
+            import './index.css';
+            import App from './App';
+            import reportWebVitals from './reportWebVitals';
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(
+              <React.StrictMode>
+                <App />
+              </React.StrictMode>
+            );
+            // If you want to start measuring performance in your app, pass a function
+            // to log results (for example: reportWebVitals(console.log))
+            // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+            reportWebVitals();
+            */
+        7.1.2 Add
+            import React from 'react';
+            import ReactDOM from 'react-dom';
+            import './index.css';
+            import reportWebVitals from './reportWebVitals';
+            var element = React.createElement('h1', { className: 'greeting' }, 'Hello, world!');
+            ReactDOM.render(element, document.getElementById('root'));
+            reportWebVitals();  
+    8. Git
+      .git was also downloaded from Github.
+      - Every change in a file can be seen with the icon at the top right 'open changes'
+      - At the left is the icon for the 'Source Control-pending changes' where you can commit the changes in file
+    9. Debugging
+      - To debug the client side React code, we'll use the built-in JavaScript debugger.
+      - Note: This tutorial assumes you have the Edge browser installed. If you want to debug using Chrome,
+              replace the launch type with chrome. There is also a debugger for the Firefox browser.
+      9.1 Set a breakpoint
+          In index.js at line with var element =
+      9.2 Configure debugger
+          This will create a launch.json file in a new .vscode folder in your project
+          which includes a configuration to launch the website.
+              ->In 'Run and Debug' select 'create a launch.json file link' and choose 'Choose Web App (Edge)'
+                  change the port of the url from 8080 to 3000
+                  chang "type": "pwa-msedge" to "type": "msedge"
+      9.3 Ensure that your development server is running (npm start).
+          Then press F5 or the green arrow to launch the debugger and open a new browser instance.
+      9.4 The source code where the breakpoint is set runs on startup before the debugger was attached,
+          so we won't hit the breakpoint until we refresh the web page.
+          Refresh the page and you should hit your breakpoint.
+      9.5 You can step through your source code (F10), inspect variables such as element,
+          and see the call stack of the client side React application.
+    10. Linting
+      10.1 Install ESLint globally
+              > npm install -g eslint
+      10.2 Install the ESLint extension by going to the Extensions view and typing 'eslint'.
+      10.3 Create an ESLint configuration file, .eslintrc.js.
+        10.3.1 Ctrl-Shift-P: ESLint: Create ESLint configuration
+              Error
+        10.3.1 my-react-app> eslint --init
+              Output
+                  You can also run this command directly using 'npm init @eslint/config'.
+                  √ How would you like to use ESLint? · problems
+                  √ What type of modules does your project use? · esm
+                  √ Which framework does your project use? · react
+                  √ Does your project use TypeScript? · No / Yes
+                  √ Where does your code run? · browser
+                  √ What format do you want your config file to be in? · JavaScript
+                  Local ESLint installation not found.
+                  The config that you've selected requires the following dependencies:
+                  eslint-plugin-react@latest eslint@latest
+                  √ Would you like to install them now? · No / Yes
+                  √ Which package manager do you want to use? · npm
+                  Installing eslint-plugin-react@latest, eslint@latest
+                  up to date, audited 1446 packages in 5s
+                  207 packages are looking for funding
+                    run `npm fund` for details
+                  6 high severity vulnerabilities
+                  To address all issues (including breaking changes), run:
+                    npm audit fix --force
+                  Run `npm audit` for details.
+                  A config file was generated, but the config file itself may not follow your linting rules.
+                    Successfully created .eslintrc.js file in C:\Users\41792\Documents\5) More-Code\Nodejs_Apps\myReactApp\my-react-app
+      10.4 Add rules in .eslintrc.js, like:
+        10.4.1 .eslintrc.js
+                  "rules": {
+                      "no-extra-semi":"error"
+                  }
+
+
+
+2.2 (does not work) A React application from Github; App folder: ReactTodoApp
+    Code from: https://github.com/microsoft/vscode-react-sample
+    1. clone repo
+        ReactTodoApp> git clone https://github.com/Microsoft/vscode-react-sample.git react-todo
+    2. install deps
+        ReactTodoApp/react-todo> npm install
+                        Error: Dependencies too old, depreciated
+    3. Backend
+        3.1 Run in terminal
+            ReactTodoApp/react-todo> npm run serve
+        3.2 Instead you can also debug in Visual Studio Code with pressing the f5 key.
+    4. Frontend
+        4.1 run in terminal
+            ReactTodoApp/react-todo> npm run dev
+        4.2 Run from Visual Studio Code by executing command (with f1 to open command palette) Run Task and selecting dev.
+    5. Database
+        No configuration should be necessary necessary. Data backend is simply a json file called todos.json in data/.
+        If you run into any issues make sure todos.json has the following inside before starting the server.
+        This will become more robust overtime.
+        {
+            "todos": []
+        }
+
+
+3. React Tutorial
+    App folder: Reactjsorg-tutorial
+    https://reactjs.org/tutorial/tutorial.html
+    React is a declarative, efficient, and flexible JavaScript library for building user interfaces.
+    It lets you compose complex UIs from small and isolated pieces of code called “components”.
+    1. Create React App
+      1.1 Reactjsorg-tutorial> npx create-react-app my-app
+    2. Delete all files in the src/ folder of the new project
+    3. Add a file named index.css in the src/ folder with this CSS code.
+      3.1 src/index.css
+            body {
+              font: 14px "Century Gothic", Futura, sans-serif;
+              margin: 20px;
+            }         
+            ol, ul {
+              padding-left: 30px;
+            }
+            .board-row:after {
+              clear: both;
+              content: "";
+              display: table;
+            }
+            .status {
+              margin-bottom: 10px;
+            }
+            .square {
+              background: #fff;
+              border: 1px solid #999;
+              float: left;
+              font-size: 24px;
+              font-weight: bold;
+              line-height: 34px;
+              height: 34px;
+              margin-right: -1px;
+              margin-top: -1px;
+              padding: 0;
+              text-align: center;
+              width: 34px;
+            }
+            .square:focus {
+              outline: none;
+            }
+            .kbd-navigation .square:focus {
+              background: #ddd;
+            }
+            .game {
+              display: flex;
+              flex-direction: row;
+            }
+            .game-info {
+              margin-left: 20px;
+            }
+    4. Add a file named index.js in the src/ folder with this JS code.
+      4.1 src/index.js
+            class Square extends React.Component {
+              render() {
+                return (
+                  <button className="square">
+                    {/* TODO */}
+                  </button>
+                );
+              }
+            }
+            class Board extends React.Component {
+              renderSquare(i) {
+                return <Square />;
+              }
+              render() {
+                const status = 'Next player: X';
+                return (
+                  <div>
+                    <div className="status">{status}</div>
+                    <div className="board-row">
+                      {this.renderSquare(0)}
+                      {this.renderSquare(1)}
+                      {this.renderSquare(2)}
+                    </div>
+                    <div className="board-row">
+                      {this.renderSquare(3)}
+                      {this.renderSquare(4)}
+                      {this.renderSquare(5)}
+                    </div>
+                    <div className="board-row">
+                      {this.renderSquare(6)}
+                      {this.renderSquare(7)}
+                      {this.renderSquare(8)}
+                    </div>
+                  </div>
+                );
+              }
+            }
+            class Game extends React.Component {
+              render() {
+                return (
+                  <div className="game">
+                    <div className="game-board">
+                      <Board />
+                    </div>
+                    <div className="game-info">
+                      <div>{/* status */}</div>
+                      <ol>{/* TODO */}</ol>
+                    </div>
+                  </div>
+                );
+              }
+            }
+            // ========================================
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(<Game />);
+    5. Add these three lines to the top of index.js in the src/ folder:
+      5.1 src/index.js
+            import React from 'react';
+            import ReactDOM from 'react-dom/client';
+            import './index.css';
+    6. Run App
+      6.1 my-app> npm start
+    7. Open in the Browser, you should see an empty tic-tac-toe field
+      7.1 URL http://localhost:3000
+    8. Go throught the tutorial. Finished code with comments:
+      8.1 src/index.js
+            import React from "react";
+            import ReactDOM from "react-dom/client";
+            import "./index.css";
+            // Toggle: Comment / Uncomment: Alt-Shift-A
+            // Installed: Prettier in VScode
+            /*classes with just a return statement can be replaced with a function like square*/
+            class Square_as_class extends React.Component {
+              /*constructor to initialize the state, which is used to remember things*/
+              /* constructor(props) {
+                  super(props);
+                  this.state = {
+                    value: null,
+                  };
+                } 
+              */
+              /*function*/
+              render() {
+                return (
+                  /*  <button className="square" onClick={() => console.log('click')}>
+                          {this.props.value}
+                      </button> 
+                  */
+                  /*  <button
+                        className="square"
+                        onClick={() => this.setState({value: 'X'})}
+                      >
+                        {this.state.value}
+                      </button> 
+                  */
+                  <button className="square" onClick={() => this.props.onClick()}>
+                    {this.props.value_}
+                  </button>
+                );
+              }
+            }
+            /*classes like Square_as_class with just a return statement can be replaced with a function*/
+            function Square(props_) {
+              return (
+                <button className="square" onClick={props_.onClick__}>
+                  {props_.value__}
+                </button>
+              );
+            }
+            class Board extends React.Component {
+              /*constructor to initialize the state, which is used to remember things*/
+              /* constructor(props_) {
+                super(props_);
+                  this.state = {
+                  squares: Array(9).fill(null),
+                  xIsNext: true,
+                };
+              } 
+              */
+              /*function*/
+              /* handleClick_(i) {
+                const squares = this.state.squares.slice();
+                if (calculateWinner(squares) || squares[i]) {
+                  return;
+                }
+                //squares[i] = 'X';
+                squares[i] = this.state.xIsNext ? "X" : "O";
+                this.setState({
+                  squares: squares,
+                  xIsNext: !this.state.xIsNext,
+                });
+              } 
+              */
+              /*function*/
+              renderSquare_(i) {
+                //return <Square />;
+                /*pass the property value with assiged input i to child component Square*/
+                //return <Square value={i} />;
+                //return <Square value={this.state.squares[i]} />;
+                return (
+                  <Square
+                    /* value_={this.state.squares[i]}
+                    onClick={() => this.handleClick_(i)} 
+                    */
+                    /* value_={this.props_.squares[i]}
+                    onClick={() => this.props_.onClick(i)} 
+                    */
+                    value__={this.props.squares_[i]}
+                    onClick__={() => this.props.onClick_(i)}
+                  />
+                );
+              }
+              /*function*/
+              render() {
+                //const status = 'Next player: X';
+                //const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+                /* const winner = calculateWinner(this.state.squares);
+                let status;
+                if (winner) {
+                  status = "Winner: " + winner;
+                } else {
+                  status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+                } 
+                */
+                return (
+                  <div>
+                    <div className="board-row">
+                      {this.renderSquare_(0)}
+                      {this.renderSquare_(1)}
+                      {this.renderSquare_(2)}
+                    </div>
+                    <div className="board-row">
+                      {this.renderSquare_(3)}
+                      {this.renderSquare_(4)}
+                      {this.renderSquare_(5)}
+                    </div>
+                    <div className="board-row">
+                      {this.renderSquare_(6)}
+                      {this.renderSquare_(7)}
+                      {this.renderSquare_(8)}
+                    </div>
+                  </div>
+                );
+              }
+            }
+            class Game extends React.Component {
+              /*constructor to initialize the state, which is used to remember things*/
+              constructor(props_) {
+                super(props_);
+                /*property state (magic name, do not change) with two key:value pairs,
+                history as list of squares (Array) and xIsNext (boolean)*/
+                this.state = {
+                  history: [{ squares: Array(9).fill(null) }],
+                  stepNumber: 0,
+                  xIsNext: true,
+                };
+              }
+              /*function used for (sent to) the Board and eventually for (sent to) the Square(s)*/
+              handleClick(i) {
+                //const history = this.state.history;
+                const history = this.state.history.slice(0, this.state.stepNumber + 1);
+                const current = history[history.length - 1];
+                /*slice makes a new copy, const squares immutable*/
+                const squares = current.squares.slice();
+                /*return if a winner or if squares not null*/
+                if (calculateWinner(squares) || squares[i]) {
+                  return;
+                }
+                /*(this.state.xIsNext ? "X" : "O") meaning: if true then "X" else "O"*/
+                squares[i] = this.state.xIsNext ? "X" : "O";
+                /*method of React.Component, used to set the this.state property*/
+                this.setState({
+                  /*history db as a list/array of squares, where squares is an Array.
+                  Unlike the array push() method you might be more familiar with,
+                  the concat() method doesn’t mutate the original array, so we prefer it.
+                  */
+                  history: history.concat([{ squares: squares }]),
+                  stepNumber: history.length,
+                  xIsNext: !this.state.xIsNext,
+                });
+              }
+              /*function, used for moves display buttons
+              Used to update the state of stepNumber.
+              We also set xIsNext to true if the number that we’re changing stepNumber to is even.
+              Notice in jumpTo method, we haven’t updated history property of the state.
+              That is because state updates are merged or in more simple words
+              React will update only the properties mentioned in setState method leaving the remaining state as is.
+              */
+              jumpTo(step) {
+                this.setState({ stepNumber: step, xIsNext: step % 2 === 0 });
+              }
+
+              /*function*/
+              render() {
+                /*https://www.freecodecamp.org/news/understanding-let-const-and-var-keywords/
+                With ES6 (EcmaScript 2015), the beginning of the modern era in JavaScript,
+                the language got two new keywords to help us declare variables. These are let and const.
+                If you do not want a variable declared inside a { } block to be accessed outside of the block,
+                you need to declare them using the let or const keywords.
+                Variables declared outside of any functions and blocks are global and are said to have Global Scope.
+                This means you can access them from any part of the current JavaScript program.
+                var: The functional scope level
+                let: The block scope level
+                const: The block scope level
+                */
+                const history = this.state.history;
+                //const current = history[history.length - 1];
+                const current = history[this.state.stepNumber];
+                /*used for the moves display and filled with html.
+                  a simpler map example:
+                  const numbers = [1, 2, 3];
+                  const doubled = numbers.map(x => x * 2); // [2, 4, 6]
+                */
+                const moves = history.map((step, move) => {
+                  /*description, step variable refers to the current history element value,
+                  and move refers to the current history element index.
+                  history is an array (step) of arrays (move), move gets values 0,1..,8 
+                  */
+                  const desc = move ? "Go to move #" + move : "Go to game start";
+                  return (
+                    /*It’s strongly recommended that you assign proper keys whenever you build dynamic lists.
+                    key is a special and reserved property in React (along with ref, a more advanced feature).
+                    In the tic-tac-toe game’s history, each past move has a unique ID associated with it:
+                    it’s the sequential number of the move. The moves are never re-ordered, deleted,
+                    or inserted in the middle, so it’s safe to use the move index as a key.*/
+                    <li key={move}>
+                      {" "}
+                      <button onClick={() => this.jumpTo(move)}>{desc}</button>{" "}
+                    </li>
+                  );
+                });
+                /*used for the status display*/
+                const winner = calculateWinner(current.squares);
+                let status;
+                if (winner) {
+                  status = "Winner: " + winner;
+                } else {
+                  /*(this.state.xIsNext ? "X" : "O") meaning: if true then "X" else "O"*/
+                  status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+                }
+                return (
+                  <div className="game">
+                    <div className="game-board">
+                      {/* <Board /> */}
+                      <Board
+                        squares_={current.squares}
+                        /*(i) => this.handleClick(i) is sam as: function(i) { this.handleClick(i);
+                          meaning Board gets variable onClick which is a whole function
+                        */
+                        onClick_={(i) => this.handleClick(i)}
+                      />
+                    </div>
+                    <div className="game-info">
+                      <div>{/* status */}</div>
+                      <div>{status}</div>
+                      <ol>{/* TODO */}</ol>
+                      <ol>{moves}</ol>
+                    </div>
+                  </div>
+                );
+              }
+            }
+            // ========================================
+            /*main*/
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(<Game />);
+            /*helper function*/
+            function calculateWinner(squares) {
+              /*all possible winning lines, and their indexes*/
+              const lines = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6],
+              ];
+              for (let i = 0; i < lines.length; i++) {
+                const [a, b, c] = lines[i];
+                /*if e.g. sqares[0] not null && squares[0] === squares[1] && squares[0] === squares[2] there is a winner, return winner  squares[0]
+                https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+                To avoid type coercion, use the triple-equals operator
+                The && and || operators use short-circuit logic, which means whether they will execute their second operand is dependent on the first.*/
+                if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+                  return squares[a];
+                }
+              }
+              return null;
+            }
