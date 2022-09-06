@@ -1,0 +1,16 @@
+{
+  "name": "react-ex-8-addreactinoneminute-jsx-preprocessor",
+  "version": "1.0.0",
+  "description": "https://reactjs.org/docs/add-react-to-a-website.html",
+  "main": "react-ex-8-AddReactInOneMinute-jsx-preprocessor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
