@@ -1,3 +1,6 @@
+Git Message
+  git commit -m "Tutorial from: https://www.taniarascia.com/getting-started-with-react/ and https://www.taniarascia.com/how-to-connect-to-an-api-with-javascript/ and https://www.w3schools.com/js/js_object_constructors.asp and https://docs.github.com/en/pages/quickstart and https://github.com/gitname/react-gh-pages#4-add-a-homepage-property-to-the-packagejson-file"
+
 Tutorial
   https://www.taniarascia.com/getting-started-with-react/
   https://www.taniarascia.com/how-to-connect-to-an-api-with-javascript/
@@ -50,6 +53,7 @@ JavaScript Datatypes
     - const x5 = []; Use array literals [] instead of new Array().
     - const x6 = /()/ Use pattern literals /()/ instead of new RegExp().
     - const x7 = function(){}; Use function expressions () {} instead of new Function().
+    - const x7 = () => {}
 
 API 
   - another tutorial
@@ -71,7 +75,7 @@ Building and Deploying a React App
   - Now, if you just want to compile all the React code and 
     place it in the root of a directory somewhere, 
     all you need to do is run the following line:
-      react-tutorial-master> npm run build
+      react-tutorial> npm run build
           Output 
             > react-tutorial@1.0.0 build
             > react-scripts build
@@ -85,6 +89,11 @@ Building and Deploying a React App
             The build folder is ready to be deployed.
             Find out more about deployment here:
               https://cra.link/deployment
+  - On localhost the app runs with a double click on the index.html
+  - You can also globally install a server and use it to run the app which is in
+    some-other-place>build
+      some-other-place> npm install -g serve
+      some-other-place> serve -s build
 
 Deploying to Github User Pages 
   - We can also take it a step further, and have npm deploy for us. 
