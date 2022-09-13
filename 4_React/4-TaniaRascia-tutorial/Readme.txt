@@ -132,7 +132,7 @@ Deploying to Github User Pages
       - Under "Build and deployment", under "Branch", 
         use the None or Branch drop-down menu and select a publishing source.
         -> already set gh-pages /root
-  - Second, move you Code to _GitHubPages-remote
+  - Second, move you Code to 0_GitHubPages-remote
   - Third, we're going to add a homepage field to package.json, 
     that has the URL we want our app to live on.
       "homepage": "https://rolandbenz.github.io",
@@ -294,9 +294,9 @@ Very simple web app with plain JavaScript
   - A web API uses HTTP requests that correspond to the CRUD verbs.
       Action 	HTTP Method 	Description
       Create 	POST 	        Creates a new resource
-      Read 	  GET 	        Retrieves a resource
-      Update 	PUT/PATCH 	  Updates an existing resource
-      Delete 	DELETE 	      Deletes a resource
+      Read 	    GET 	        Retrieves a resource
+      Update 	PUT/PATCH 	    Updates an existing resource
+      Delete 	DELETE 	        Deletes a resource
   - One API ENDPOINT: https://ghibliapi.herokuapp.com/films
     To get started, let's scroll to the films section. 
     On the right you'll see GET /films. It will show us the URL of our API endpoint, 

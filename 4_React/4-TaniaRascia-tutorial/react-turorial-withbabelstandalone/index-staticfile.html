@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React App</title>
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". 
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
+  <!-- importing React development-->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <!-- importing React-Dom development-->
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Don't use this in production: -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- CSS inclusion -->
+  <link rel="stylesheet" type="text/css" href="index.css" media="all" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    /*
+      Table.js
+    */
+
+    const TableHeader = () => {
+      return (
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Job</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+      );
+    };
+
+    const TableBody = (props) => {
+      /* 
+        - Rows gets the jsx for each row in characterData through map method
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+        - Row contains name, job. Index is a map internal iterator variable.
+        - You should always use keys when making lists in React, as they help identify each list item.
+      */
+      const rows = props.characterData.map((row, index) => {
+        return (
+          <tr key={index}>
+            <td>{row.name}</td>
+            <td>{row.job}</td>
+            <td>
+              <button onClick={() => props.removeCharacter(index)}>Delete</button>
+            </td>
+          </tr>
+        );
+      });
+
+      return <tbody>{rows}</tbody>;
+    };
+
+    /*
+      - Since Table does not have its own state, 
+         it is best practice to define Table as a simple component, not a class component.
+    */
+    const Table = (props) => {
+      /*
+        - ES6 property shorthand to create the variables characterData, removeCharacters
+          that contains props.
+      */
+      const { characterData, removeCharacter } = props;
+      return (
+        <table>
+          <TableHeader />
+          <TableBody
+            characterData={characterData}
+            removeCharacter={removeCharacter}
+          />
+        </table>
+      );
+    };
+
+    /*
+      Form.js
+    */
+    /*
+    - Our goal for this form will be to update the state of Form 
+      every time a field is changed in the form, 
+      and when we submit, all that data will pass to the App state, 
+      which will then update the Table.
+    */
+    class Form extends React.Component {
+      /*
+        - Class component Form gets a constructor with an initial state with empty properties 
+        - Previously, it was necessary to include a constructor() on React class components, 
+          but it's not required anymore.
+      */
+      constructor(props) {
+        super(props);
+
+        this.initialState = {
+          name: "",
+          job: "",
+        };
+        this.state = this.initialState;
+      }
+      /*
+        - Function that handels onChange event every time a change is made to an input. 
+        - The event will be passed through, 
+          and we'll set the state of Form to have the name (key) and value of the inputs. 
+      */
+      handleChange = (event) => {
+        const { name, value } = event.target;
+
+        this.setState({
+          [name]: value,
+        });
+      };
+      /*
+        - Function that handels submit event of the button. 
+        - It is the newer version on GitHub
+      */
+      onFormSubmit = (event) => {
+        /*
+          - method preventDefault() prevents something, not clear what. 
+        */
+        event.preventDefault();
+        /*
+          - pass this.state to handleSubmit method of App
+            which submits this data and updates the parent state
+          - set the state of Form to initial empty state
+        */
+        this.props.handleSubmit(this.state);
+        this.setState(this.initialState);
+      };
+      /*
+        - Function that handels submit event of the button. 
+        - It is the older version of the website tutorial
+      */
+      submitForm = () => {
+        this.props.handleSubmit(this.state)
+        this.setState(this.initialState)
+      }
+
+      render() {
+        /*
+          - ES6 property shorthand to create a variables 'name, job' that contains this.state
+        */
+        const { name, job } = this.state;
+
+        return (
+          <form onSubmit={this.onFormSubmit}>
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              onChange={this.handleChange}
+            />
+            <label for="job">Job</label>
+            <input
+              type="text"
+              name="job"
+              id="job"
+              value={job}
+              onChange={this.handleChange}
+            />
+            {/*
+					- button above: newer version on GitHub, here the function that handles the submit 
+						is defined in the form label as onSubmit={this.onFormSubmit}
+					- input below: older version in tutorial on website 
+				*/}
+            <button type="submit">Submit</button>
+            <br/>
+            <input type="button" value="Submit" onClick={this.submitForm} />
+          </form>
+        );
+      }
+    }
+
+    /*
+      App.js
+    */
+    class App extends React.Component {
+      /*
+        - Previously, it was necessary to include a constructor() on React class components, 
+          but it's not required anymore.
+      */
+      /* 
+        - You can think of state as any data that should be saved and modified 
+          without necessarily being added to a database - 
+          for example, adding and removing items from a shopping cart before confirming your purchase.
+        - state = {} is an Object object
+        - The object will contain properties for everything you want to store in the state. 
+          For us, it's characters.
+        - https://www.w3schools.com/js/js_object_constructors.asp
+          https://stackoverflow.com/questions/21545687/javascript-vs-new-object-performance
+          - let x1 = ""; Use string literals "" instead of new String().
+          - let x2 = 0; Use number literals 50 instead of new Number().
+          - let x3 = false; Use boolean literals true / false instead of new Boolean().
+          - const x4 = {}; Use object literals {} instead of new Object().
+          - const x5 = []; Use array literals [] instead of new Array().
+          - const x6 = /()/ Use pattern literals /()/ instead of new RegExp().
+          - const x7 = function(){}; Use function expressions () {} instead of new Function().
+      */
+      state = {
+        /* 
+          - We can also add data to an array of objects, 
+            as if we were bringing in a JSON-based API.
+        */
+        //characters: []
+        characters: [
+          {
+            name: 'Charlie',
+            job: 'Janitor',
+          },
+          {
+            name: 'Mac',
+            job: 'Bouncer',
+          },
+          {
+            name: 'Dee',
+            job: 'Aspring actress',
+          },
+          {
+            name: 'Dennis',
+            job: 'Bartender',
+          },
+        ],
+      };
+      /* 
+        - Button event handler function which uses index to remove a row from this.state={characters:[]}
+      */
+      removeCharacter = (index) => {
+        /*
+          - ES6 property shorthand to create a variable 'characters' that contains this.state
+        */
+        const { characters } = this.state;
+        /*
+          - You must use this.setState() to modify an array. 
+            Simply applying a new value to this.state.property will not work. 
+          - filter does not mutate but rather creates a new array, 
+            and is a preferred method for modifying arrays in JavaScript. 
+          - This particular method is testing an index vs. all the indices in the array, 
+            and returning all but the one that is passed through.
+            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter?retiredLocale=vi
+        */
+        this.setState({
+          characters: characters.filter((character, i) => {
+            return i !== index;
+          }),
+        });
+      };
+      /* 
+        - Form event handler function to add a row to this.state={characters:[]}
+        - updates the state by taking the existing this.state.characters 
+          and adding the new character parameter, using the ES6 spread operator.
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+      */
+      handleSubmit = (character) => {
+        this.setState({ characters: [...this.state.characters, character] });
+      };
+    
+      render() {
+        /*
+          - ES6 property shorthand to create a variable 'characters' that contains this.state
+        */
+        const { characters } = this.state;
+    
+        return (
+          /*
+            - Notice that we use className instead of class. 
+              This is our first hint that the code being written here is JavaScript, 
+              and not actually HTML.
+            - It is JSX, which stands for JavaScript XML.
+              With JSX, we can write what looks like HTML,
+              and also we can create and use our own XML-like tags. 
+            - Using JSX is not mandatory for writing React. 
+            - Under the hood, it's running createElement, which takes the tag, 
+              object containing the properties, and children of the component 
+              and renders the same information.
+            - Properties and methods in JSX are camelCase - onclick will become onClick.
+            - Self-closing tags must end in a slash - e.g. <img />
+            - JavaScript expressions can also be embedded inside JSX using curly braces, 
+              including variables, functions, and properties.
+                const name = 'Tania'
+                const heading = <h1>Hello, {name}</h1>
+          */
+          <div className="container">
+            <h1>React Tutorial</h1>
+            <p>Add a character with a name and a job to the table.</p>
+            {/*
+                - Load the simple component Table - which is a function
+                - Compontent is Table, 
+                - Properties are characterData, removeCharacter, 
+                - JavaScript Expressions are characters - which is data, 
+                  and this.removeCharacter - which is a function
+            */}
+            <Table
+              characterData={characters}
+              removeCharacter={this.removeCharacter}
+            />
+            <h3>Add New</h3>
+            {/*
+                - Load the class component Form - which is a class
+                - Component is Form
+                - Property is handleSubmit
+                - Javascript Expression is this.handleSubmit - which is a a function
+            */}
+            <Form handleSubmit={this.handleSubmit} />
+          </div>
+        );
+      }
+    }
+
+    /*
+      index.js
+    */
+    //Entry Point for our App is <div id="root"></div> in public/index.html
+    ReactDOM.render(<App />, document.getElementById('root'));
+    //main
+    //const root = ReactDOM.createRoot(document.getElementById("root"));
+    //root.render(<App />);
+
+  </script>
+  <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+</body>
+
+</html>
