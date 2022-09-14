@@ -146,12 +146,16 @@
       render() {
         /*
           - ES6 property shorthand to create a variables 'name, job' that contains this.state
+          - Firefox Warning: Invalid DOM property `for`. Did you mean `htmlFor`? label form
+              - When using React, you can't use the for keyword in JSX, since that's a javascript keyword (remember, 
+                JSX is javascript so words like for and class can't be used because they have some other special meaning!)
+                To circumvent this, React elements use htmlFor instead (see React docs for more information). 
+                https://stackoverflow.com/questions/59924585/im-getting-an-error-using-react-invalid-dom-property-for-did-you-mean-htm
         */
         const { name, job } = this.state;
-
         return (
           <form onSubmit={this.onFormSubmit}>
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input
               type="text"
               name="name"
@@ -159,7 +163,7 @@
               value={name}
               onChange={this.handleChange}
             />
-            <label for="job">Job</label>
+            <label htmlFor="job">Job</label>
             <input
               type="text"
               name="job"
@@ -168,10 +172,10 @@
               onChange={this.handleChange}
             />
             {/*
-					- button above: newer version on GitHub, here the function that handles the submit 
-						is defined in the form label as onSubmit={this.onFormSubmit}
-					- input below: older version in tutorial on website 
-				*/}
+              - button above: newer version on GitHub, here the function that handles the submit 
+                is defined in the form label as onSubmit={this.onFormSubmit}
+              - input below: older version in tutorial on website 
+            */}
             <button type="submit">Submit</button>
             <br/>
             <input type="button" value="Submit" onClick={this.submitForm} />
@@ -318,11 +322,27 @@
     /*
       index.js
     */
-    //Entry Point for our App is <div id="root"></div> in public/index.html
-    ReactDOM.render(<App />, document.getElementById('root'));
-    //main
-    //const root = ReactDOM.createRoot(document.getElementById("root"));
-    //root.render(<App />);
+
+    /*
+      - Firefox Warning: ReactDOM.render is no longer supported in React 18. Use createRoot instead. 
+        Until you switch to the new API, your app will behave as if it's running React 17.
+        https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis
+        - // Before
+          import { render } from 'react-dom';
+          const container = document.getElementById('app');
+          render(<App tab="home" />, container);
+          // After
+          import { createRoot } from 'react-dom/client';
+          const container = document.getElementById('app');
+          const root = createRoot(container); // createRoot(container!) if you use TypeScript
+          root.render(<App tab="home" />);
+    */  
+    //React17: Entry Point for our App is <div id="root"></div> in public/index.html
+    //ReactDOM.render(<App />, document.getElementById('root'));
+    //React18:
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
 
   </script>
   <!--
